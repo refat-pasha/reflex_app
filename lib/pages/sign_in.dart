@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reflex_app/pages/sign_up.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -61,8 +62,8 @@ class _SignInPageState extends State<SignInPage> {
                           Row(
                             children: [
                               Container(
-                                width: 38,
-                                height: 38,
+                                width: 50,
+                                height: 50,
                                 decoration: const BoxDecoration(
                                   // shape: BoxShape.circle,
                                   color: Colors.white,
@@ -70,8 +71,8 @@ class _SignInPageState extends State<SignInPage> {
                                 alignment: Alignment.center,
                                 child: Image.asset(
                                   'assets/images/logo.png',
-                                  width: 35,
-                                  height: 35,
+                                  width: 50,
+                                  height: 50,
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -300,18 +301,6 @@ class _SignInPageState extends State<SignInPage> {
           },
         ),
       ),
-    );
-  }
-}
-
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Create Account')),
-      body: const Center(child: Text('Sign Up Screen')),
     );
   }
 }
