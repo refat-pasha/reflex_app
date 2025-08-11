@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reflex_app/pages/sign_up.dart';
+import 'dashboard.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -23,27 +24,27 @@ class _SignInPageState extends State<SignInPage> {
 
   void _submit(BuildContext context) {
     if (_formKey.currentState?.validate() != true) return;
-    ScaffoldMessenger.of(
+
+    // On success, navigate to Dashboard
+    Navigator.of(
       context,
-    ).showSnackBar(const SnackBar(content: Text('Signing in...')));
-    // TODO: On success, navigate:
-    // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const HomePage()));
+    ).pushReplacement(MaterialPageRoute(builder: (_) => const DashboardPage()));
   }
 
   @override
   Widget build(BuildContext context) {
-    const Color primaryGreen = Color(0xFF0FA16C);
-    const Color bgGrey = Color(0xFFF3F3F3);
-    const double radius = 16;
+    const primaryGreen = Color(0xFF0FA16C);
+    const bgGrey = Color(0xFFF3F3F3);
+    const radius = 16.0;
 
     return Scaffold(
       backgroundColor: bgGrey,
       body: SafeArea(
         child: LayoutBuilder(
-          builder: (context, constraints) {
-            final double maxW = constraints.maxWidth > 440
-                ? 440
-                : constraints.maxWidth;
+          builder: (context, layoutConstraints) {
+            final maxW = layoutConstraints.maxWidth > 440.0
+                ? 440.0
+                : layoutConstraints.maxWidth;
             return Center(
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: maxW),
@@ -55,24 +56,24 @@ class _SignInPageState extends State<SignInPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // Header: logo + name + decorative circles
+                      // Header + decorative circles
                       Stack(
                         clipBehavior: Clip.none,
                         children: [
                           Row(
                             children: [
                               Container(
-                                width: 50,
-                                height: 50,
+                                width: 38,
+                                height: 38,
                                 decoration: const BoxDecoration(
-                                  // shape: BoxShape.circle,
+                                  shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
                                 alignment: Alignment.center,
                                 child: Image.asset(
                                   'assets/images/logo.png',
-                                  width: 50,
-                                  height: 50,
+                                  width: 26,
+                                  height: 26,
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -88,7 +89,6 @@ class _SignInPageState extends State<SignInPage> {
                               ),
                             ],
                           ),
-                          // Top-right circles
                           Positioned(
                             right: -30,
                             top: -10,
@@ -118,7 +118,6 @@ class _SignInPageState extends State<SignInPage> {
 
                       const SizedBox(height: 28),
 
-                      // Welcome text
                       const Text(
                         'Welcome Back !',
                         textAlign: TextAlign.center,
@@ -131,10 +130,9 @@ class _SignInPageState extends State<SignInPage> {
 
                       const SizedBox(height: 24),
 
-                      // Illustration
                       Center(
                         child: Image.asset(
-                          'assets/images/Frame2.png',
+                          'assets/images/frame2.png',
                           height: 180,
                           fit: BoxFit.contain,
                         ),
@@ -142,7 +140,7 @@ class _SignInPageState extends State<SignInPage> {
 
                       const SizedBox(height: 28),
 
-                      // Input card
+                      // Form Card
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -170,22 +168,11 @@ class _SignInPageState extends State<SignInPage> {
                                     borderSide: BorderSide.none,
                                   ),
                                 ),
-                                validator: (v) {
-                                  if (v == null || v.trim().isEmpty) {
-                                    return 'Email is required';
-                                  }
-                                  final emailReg = RegExp(
-                                    r'^[^\s@]+@[^\s@]+\.[^\s@]+$',
-                                  );
-                                  if (!emailReg.hasMatch(v.trim())) {
-                                    return 'Enter a valid email';
-                                  }
-                                  return null;
-                                },
+                                validator: (v) => v != null && v.contains('@')
+                                    ? null
+                                    : 'Enter a valid email',
                               ),
-
                               const SizedBox(height: 14),
-
                               TextFormField(
                                 controller: _passCtrl,
                                 obscureText: _obscure,
@@ -203,41 +190,26 @@ class _SignInPageState extends State<SignInPage> {
                                     borderSide: BorderSide.none,
                                   ),
                                   suffixIcon: IconButton(
-                                    onPressed: () =>
-                                        setState(() => _obscure = !_obscure),
                                     icon: Icon(
                                       _obscure
                                           ? Icons.visibility_off
                                           : Icons.visibility,
                                     ),
+                                    onPressed: () =>
+                                        setState(() => _obscure = !_obscure),
                                   ),
                                 ),
-                                validator: (v) {
-                                  if (v == null || v.isEmpty) {
-                                    return 'Password is required';
-                                  }
-                                  if (v.length < 6) {
-                                    return 'Use at least 6 characters';
-                                  }
-                                  return null;
-                                },
+                                validator: (v) => v != null && v.length >= 6
+                                    ? null
+                                    : 'Use at least 6 characters',
                                 onFieldSubmitted: (_) => _submit(context),
                               ),
-
                               const SizedBox(height: 16),
-
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: TextButton(
-                                  onPressed: () {
-                                    // TODO: Forgot password
-                                  },
-                                  child: const Text(
-                                    'Forgot password?',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
+                                  onPressed: () {},
+                                  child: const Text('Forgot password?'),
                                 ),
                               ),
                             ],
@@ -247,7 +219,6 @@ class _SignInPageState extends State<SignInPage> {
 
                       const SizedBox(height: 20),
 
-                      // Sign In button
                       SizedBox(
                         height: 56,
                         child: ElevatedButton(
