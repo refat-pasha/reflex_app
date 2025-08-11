@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'doctors_profile.dart';
+
+// import the profile page
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -16,49 +19,81 @@ class _DashboardPageState extends State<DashboardPage>
       'name': 'Dr. Mosia Gloria',
       'title': 'Sr. Psychologist',
       'avatar': 'assets/images/nurse1.png',
-      'rating': 4.3,
+      'patients': 240,
+      'experience': '5 yr',
+      'rating': 4.0,
+      'about':
+          'Dr. Mosia Gloria is a senior psychologist with 5 years of experience helping patients manage stress, anxiety, and other mental health challenges.',
     },
     {
       'name': 'Dr. Margret Dir',
       'title': 'Sr. Psychologist',
       'avatar': 'assets/images/nurse2.png',
-      'rating': 4.7,
+      'patients': 180,
+      'experience': '4 yr',
+      'rating': 4.5,
+      'about':
+          'Dr. Margret Dir specializes in cognitive behavioral therapy and has helped hundreds of patients improve their mental well-being.',
     },
     {
       'name': 'Dr. Samuel Lee',
       'title': 'Child Psychologist',
-      'avatar': 'assets/images/nurse1.png',
+      'avatar': 'assets/images/nurse3.png',
+      'patients': 150,
+      'experience': '3 yr',
       'rating': 4.8,
+      'about':
+          'Dr. Samuel Lee focuses on child psychology and developmental disorders, providing compassionate care for young patients.',
     },
     {
       'name': 'Dr. Aisha Khan',
       'title': 'Clinical Psychologist',
-      'avatar': 'assets/images/nurse2.png',
+      'avatar': 'assets/images/nurse4.png',
+      'patients': 200,
+      'experience': '6 yr',
       'rating': 4.6,
+      'about':
+          'Dr. Aisha Khan has extensive experience in clinical settings, treating a wide range of mental health conditions.',
     },
     {
       'name': 'Dr. Rafael Mendes',
       'title': 'Counseling Psychologist',
-      'avatar': 'assets/images/nurse1.png',
+      'avatar': 'assets/images/nurse5.png',
+      'patients': 170,
+      'experience': '4 yr',
       'rating': 4.4,
+      'about':
+          'Dr. Rafael Mendes provides counseling for individuals and couples, focusing on relationship and life-transition issues.',
     },
     {
       'name': 'Dr. Elena Petrova',
       'title': 'Neuropsychologist',
-      'avatar': 'assets/images/nurse2.png',
+      'avatar': 'assets/images/nurse6.png',
+      'patients': 130,
+      'experience': '5 yr',
       'rating': 4.9,
+      'about':
+          'Dr. Elena Petrova specializes in neuropsychology, assessing and treating brain-related cognitive disorders.',
     },
     {
       'name': 'Dr. Kevin O\'Connor',
       'title': 'Forensic Psychologist',
-      'avatar': 'assets/images/nurse1.png',
+      'avatar': 'assets/images/nurse7.png',
+      'patients': 90,
+      'experience': '4 yr',
       'rating': 4.2,
+      'about':
+          'Dr. Kevin O\'Connor works at the intersection of psychology and the justice system, conducting assessments and expert testimony.',
     },
     {
       'name': 'Dr. Maya Singh',
       'title': 'Health Psychologist',
-      'avatar': 'assets/images/nurse2.png',
+      'avatar': 'assets/images/nurse8.png',
+      'patients': 210,
+      'experience': '6 yr',
       'rating': 4.5,
+      'about':
+          'Dr. Maya Singh focuses on how psychological factors affect physical health, offering support for chronic illness management.',
     },
   ];
 
@@ -75,54 +110,66 @@ class _DashboardPageState extends State<DashboardPage>
   }
 
   Widget _buildDoctorCard(Map<String, dynamic> doc) {
-    return Container(
-      width: 200,
-      margin: const EdgeInsets.only(right: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 8)],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.asset(doc['avatar'], height: 120, fit: BoxFit.cover),
-          ),
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Text(
-              doc['name'],
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => DoctorProfilePage(doctor: doc)),
+        );
+      },
+      child: Container(
+        width: 200,
+        margin: const EdgeInsets.only(right: 16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 8)],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(16),
+              ),
+              child: Image.asset(doc['avatar'], height: 120, fit: BoxFit.cover),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            child: Text(
-              doc['title'],
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Row(
-              children: [
-                const Icon(Icons.star, size: 16, color: Colors.amber),
-                const SizedBox(width: 4),
-                Text(doc['rating'].toStringAsFixed(1)),
-                const Spacer(),
-                const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16,
-                  color: Colors.grey,
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Text(
+                doc['name'],
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
+              ),
             ),
-          ),
-          const SizedBox(height: 12),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              child: Text(
+                doc['title'],
+                style: const TextStyle(fontSize: 14, color: Colors.grey),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  const Icon(Icons.star, size: 16, color: Colors.amber),
+                  const SizedBox(width: 4),
+                  Text(doc['rating'].toStringAsFixed(1)),
+                  const Spacer(),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
+          ],
+        ),
       ),
     );
   }
@@ -212,19 +259,17 @@ class _DashboardPageState extends State<DashboardPage>
               ],
             ),
             const SizedBox(height: 16),
-            // Horizontal doctor list wrapped in Expanded
-            Expanded(
+            SizedBox(
+              height: 240,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: _doctors.length,
                 padding: const EdgeInsets.only(left: 16),
-                itemBuilder: (context, index) {
-                  return _buildDoctorCard(_doctors[index]);
-                },
+                itemCount: _doctors.length,
+                itemBuilder: (context, index) =>
+                    _buildDoctorCard(_doctors[index]),
               ),
             ),
             const SizedBox(height: 24),
-            // Instant Appointment banner
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -245,6 +290,7 @@ class _DashboardPageState extends State<DashboardPage>
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                         SizedBox(height: 8),
