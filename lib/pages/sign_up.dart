@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reflex_app/pages/sign_in.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -27,10 +28,26 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _submit() {
     if (_formKey.currentState?.validate() != true) return;
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Registering...')));
-    // TODO: perform registration then navigate
+    // Show dialog then navigate to SignIn
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        title: const Text('Success'),
+        content: const Text('Sign up complete!'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // close dialog
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const SignInPage()),
+              );
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -65,17 +82,17 @@ class _SignUpPageState extends State<SignUpPage> {
                           Row(
                             children: [
                               Container(
-                                width: 50,
-                                height: 50,
+                                width: 38,
+                                height: 38,
                                 decoration: const BoxDecoration(
-                                  //shape: BoxShape.circle,
+                                  shape: BoxShape.circle,
                                   color: Colors.white,
                                 ),
                                 alignment: Alignment.center,
                                 child: Image.asset(
                                   'assets/images/logo.png',
-                                  width: 50,
-                                  height: 50,
+                                  width: 26,
+                                  height: 26,
                                   fit: BoxFit.contain,
                                 ),
                               ),
