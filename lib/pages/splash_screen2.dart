@@ -4,6 +4,8 @@ import 'package:reflex_app/main.dart';
 import 'package:reflex_app/pages/sign_in.dart';
 
 class SplashScreen2 extends StatefulWidget {
+  const SplashScreen2({super.key});
+
   @override
   _SplashScreen2State createState() => _SplashScreen2State();
 }

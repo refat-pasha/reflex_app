@@ -4,6 +4,8 @@ import 'package:reflex_app/main.dart';
 import 'package:reflex_app/pages/splash_screen2.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }

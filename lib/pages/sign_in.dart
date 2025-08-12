@@ -3,7 +3,7 @@ import 'package:reflex_app/pages/sign_up.dart';
 import 'dashboard.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   @override
   State<SignInPage> createState() => _SignInPageState();
