@@ -16,7 +16,7 @@ class AppUser {
     this.role = 'User',
     this.age = 0,
     this.about = '',
-    this.avatarPath = 'assets/images/nurse1.jpg',
+    this.avatarPath = 'assets/images/nurse1.png',
   });
 
   AppUser copyWith({

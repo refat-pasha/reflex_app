@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:reflex_app/pages/doctors_profile.dart'; // adjust path as needed
-import 'package:reflex_app/pages/profile.dart'; // optional: for avatar tap
+import '../models/app_user.dart';
+import 'profile.dart';
+import 'doctors_profile.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  final AppUser user;
+  const DashboardPage({Key? key, required this.user}) : super(key: key);
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -37,7 +39,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Samuel Lee',
       'title': 'Child Psychologist',
-      'avatar': 'assets/images/nurse1.png',
+      'avatar': 'assets/images/nurse3.png',
       'patients': 150,
       'experience': '3 yr',
       'rating': 4.8,
@@ -47,7 +49,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Aisha Khan',
       'title': 'Clinical Psychologist',
-      'avatar': 'assets/images/nurse2.png',
+      'avatar': 'assets/images/nurse4.png',
       'patients': 200,
       'experience': '6 yr',
       'rating': 4.6,
@@ -57,7 +59,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Rafael Mendes',
       'title': 'Counseling Psychologist',
-      'avatar': 'assets/images/nurse1.png',
+      'avatar': 'assets/images/nurse5.png',
       'patients': 170,
       'experience': '4 yr',
       'rating': 4.4,
@@ -67,7 +69,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Elena Petrova',
       'title': 'Neuropsychologist',
-      'avatar': 'assets/images/nurse2.png',
+      'avatar': 'assets/images/nurse6.png',
       'patients': 130,
       'experience': '5 yr',
       'rating': 4.9,
@@ -77,7 +79,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Kevin O\'Connor',
       'title': 'Forensic Psychologist',
-      'avatar': 'assets/images/nurse1.png',
+      'avatar': 'assets/images/nurse7.png',
       'patients': 90,
       'experience': '4 yr',
       'rating': 4.2,
@@ -87,7 +89,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Maya Singh',
       'title': 'Health Psychologist',
-      'avatar': 'assets/images/nurse1.png',
+      'avatar': 'assets/images/nurse8.png',
       'patients': 210,
       'experience': '6 yr',
       'rating': 4.5,
@@ -127,9 +129,8 @@ class _DashboardPageState extends State<DashboardPage>
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(16),
-              ),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
               child: Image.asset(doc['avatar'], height: 120, fit: BoxFit.cover),
             ),
             const SizedBox(height: 8),
@@ -137,14 +138,13 @@ class _DashboardPageState extends State<DashboardPage>
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Text(
                 doc['name'],
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               child: Text(
                 doc['title'],
                 style: const TextStyle(fontSize: 14, color: Colors.grey),
@@ -158,11 +158,8 @@ class _DashboardPageState extends State<DashboardPage>
                   const SizedBox(width: 4),
                   Text(doc['rating'].toStringAsFixed(1)),
                   const Spacer(),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 16,
-                    color: Colors.grey,
-                  ),
+                  const Icon(Icons.arrow_forward_ios,
+                      size: 16, color: Colors.grey),
                 ],
               ),
             ),
@@ -187,15 +184,15 @@ class _DashboardPageState extends State<DashboardPage>
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text('Hello,', style: TextStyle(color: Colors.grey, fontSize: 14)),
+          children: [
+            const Text('Hello,',
+                style: TextStyle(color: Colors.grey, fontSize: 14)),
             Text(
-              'Abdul!',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              widget.user.name,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -204,14 +201,14 @@ class _DashboardPageState extends State<DashboardPage>
             padding: const EdgeInsets.only(right: 16),
             child: GestureDetector(
               onTap: () {
-                // Open profile page when avatar tapped (optional)
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (_) => const ProfilePage()));
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (_) => ProfilePage(user: widget.user)),
+                );
               },
-              child: const CircleAvatar(
+              child: CircleAvatar(
                 radius: 18,
-                backgroundImage: AssetImage('assets/images/user.jpg'),
+                backgroundImage: AssetImage(widget.user.avatarPath),
               ),
             ),
           ),
@@ -223,7 +220,6 @@ class _DashboardPageState extends State<DashboardPage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 12),
-
             // Search bar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -239,19 +235,14 @@ class _DashboardPageState extends State<DashboardPage>
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: 'Search Doctor',
-                        border: InputBorder.none,
-                      ),
+                          hintText: 'Search Doctor', border: InputBorder.none),
                     ),
                   ),
                 ],
               ),
             ),
-
-            const Text(
-              'Doctors',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+            const Text('Doctors',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             TabBar(
               controller: _tabController,
               labelColor: Colors.black,
@@ -264,8 +255,7 @@ class _DashboardPageState extends State<DashboardPage>
               ],
             ),
             const SizedBox(height: 16),
-
-            // Horizontal doctors list
+            // Horizontal doctor list
             SizedBox(
               height: 240,
               child: ListView.builder(
@@ -276,9 +266,7 @@ class _DashboardPageState extends State<DashboardPage>
                     _buildDoctorCard(_doctors[index]),
               ),
             ),
-
             const SizedBox(height: 24),
-
             // Instant Appointment banner
             Container(
               padding: const EdgeInsets.all(16),
@@ -286,7 +274,7 @@ class _DashboardPageState extends State<DashboardPage>
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: const [
-                  BoxShadow(color: Colors.black12, blurRadius: 8),
+                  BoxShadow(color: Colors.black12, blurRadius: 8)
                 ],
               ),
               child: Row(
@@ -295,19 +283,12 @@ class _DashboardPageState extends State<DashboardPage>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Instant Appointment',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black, // fixed: visible on white
-                          ),
-                        ),
+                        Text('Instant Appointment',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
                         SizedBox(height: 8),
-                        Text(
-                          'Get quick access to a doctor now.',
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
-                        ),
+                        Text('Get quick access to a doctor now.',
+                            style: TextStyle(fontSize: 14, color: Colors.grey)),
                       ],
                     ),
                   ),
@@ -316,8 +297,7 @@ class _DashboardPageState extends State<DashboardPage>
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryGreen,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                          borderRadius: BorderRadius.circular(12)),
                     ),
                     child: const Text('Read more'),
                   ),
