@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'doctors_profile.dart';
-
-// import the profile page
+import 'package:reflex_app/pages/doctors_profile.dart'; // adjust path as needed
+import 'package:reflex_app/pages/profile.dart'; // optional: for avatar tap
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -38,7 +37,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Samuel Lee',
       'title': 'Child Psychologist',
-      'avatar': 'assets/images/nurse3.png',
+      'avatar': 'assets/images/nurse1.png',
       'patients': 150,
       'experience': '3 yr',
       'rating': 4.8,
@@ -48,7 +47,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Aisha Khan',
       'title': 'Clinical Psychologist',
-      'avatar': 'assets/images/nurse4.png',
+      'avatar': 'assets/images/nurse2.png',
       'patients': 200,
       'experience': '6 yr',
       'rating': 4.6,
@@ -58,7 +57,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Rafael Mendes',
       'title': 'Counseling Psychologist',
-      'avatar': 'assets/images/nurse5.png',
+      'avatar': 'assets/images/nurse1.png',
       'patients': 170,
       'experience': '4 yr',
       'rating': 4.4,
@@ -68,7 +67,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Elena Petrova',
       'title': 'Neuropsychologist',
-      'avatar': 'assets/images/nurse6.png',
+      'avatar': 'assets/images/nurse2.png',
       'patients': 130,
       'experience': '5 yr',
       'rating': 4.9,
@@ -78,7 +77,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Kevin O\'Connor',
       'title': 'Forensic Psychologist',
-      'avatar': 'assets/images/nurse7.png',
+      'avatar': 'assets/images/nurse1.png',
       'patients': 90,
       'experience': '4 yr',
       'rating': 4.2,
@@ -88,7 +87,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Maya Singh',
       'title': 'Health Psychologist',
-      'avatar': 'assets/images/nurse8.png',
+      'avatar': 'assets/images/nurse1.png',
       'patients': 210,
       'experience': '6 yr',
       'rating': 4.5,
@@ -203,9 +202,17 @@ class _DashboardPageState extends State<DashboardPage>
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: CircleAvatar(
-              radius: 18,
-              backgroundImage: AssetImage('assets/images/user.jpg'),
+            child: GestureDetector(
+              onTap: () {
+                // Open profile page when avatar tapped (optional)
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (_) => const ProfilePage()));
+              },
+              child: const CircleAvatar(
+                radius: 18,
+                backgroundImage: AssetImage('assets/images/user.jpg'),
+              ),
             ),
           ),
         ],
@@ -216,6 +223,7 @@ class _DashboardPageState extends State<DashboardPage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 12),
+
             // Search bar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -225,10 +233,10 @@ class _DashboardPageState extends State<DashboardPage>
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
-                children: [
-                  const Icon(Icons.search, color: Colors.grey),
-                  const SizedBox(width: 8),
-                  const Expanded(
+                children: const [
+                  Icon(Icons.search, color: Colors.grey),
+                  SizedBox(width: 8),
+                  Expanded(
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Search Doctor',
@@ -236,13 +244,10 @@ class _DashboardPageState extends State<DashboardPage>
                       ),
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.filter_list, color: Colors.grey),
-                    onPressed: () {},
-                  ),
                 ],
               ),
             ),
+
             const Text(
               'Doctors',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -259,6 +264,8 @@ class _DashboardPageState extends State<DashboardPage>
               ],
             ),
             const SizedBox(height: 16),
+
+            // Horizontal doctors list
             SizedBox(
               height: 240,
               child: ListView.builder(
@@ -269,7 +276,10 @@ class _DashboardPageState extends State<DashboardPage>
                     _buildDoctorCard(_doctors[index]),
               ),
             ),
+
             const SizedBox(height: 24),
+
+            // Instant Appointment banner
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -281,16 +291,16 @@ class _DashboardPageState extends State<DashboardPage>
               ),
               child: Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
                           'Instant Appointment',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black, // fixed: visible on white
                           ),
                         ),
                         SizedBox(height: 8),
