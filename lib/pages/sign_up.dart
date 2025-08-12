@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/app_user.dart';
 import 'sign_in.dart';
-import 'profile.dart';
+import 'user_profile.dart';
 
 
 class SignUpPage extends StatefulWidget {

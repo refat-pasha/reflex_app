@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/app_user.dart';
-import 'profile.dart';
+import 'user_profile.dart';
 import 'doctors_profile.dart';
 
 class DashboardPage extends StatefulWidget {

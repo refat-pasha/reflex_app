@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/app_user.dart';
 import 'dashboard.dart';
 import 'sign_up.dart';
-import 'profile.dart';
+import 'user_profile.dart';
 
 class SignInPage extends StatefulWidget {
   /// Receive initial user from SignUp if they just registered.
