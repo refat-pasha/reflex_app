@@ -39,7 +39,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Samuel Lee',
       'title': 'Child Psychologist',
-      'avatar': 'assets/images/nurse3.png',
+      'avatar': 'assets/images/nurse1.png',
       'patients': 150,
       'experience': '3 yr',
       'rating': 4.8,
@@ -49,7 +49,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Aisha Khan',
       'title': 'Clinical Psychologist',
-      'avatar': 'assets/images/nurse4.png',
+      'avatar': 'assets/images/nurse2.png',
       'patients': 200,
       'experience': '6 yr',
       'rating': 4.6,
@@ -59,7 +59,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Rafael Mendes',
       'title': 'Counseling Psychologist',
-      'avatar': 'assets/images/nurse5.png',
+      'avatar': 'assets/images/nurse1.png',
       'patients': 170,
       'experience': '4 yr',
       'rating': 4.4,
@@ -69,7 +69,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Elena Petrova',
       'title': 'Neuropsychologist',
-      'avatar': 'assets/images/nurse6.png',
+      'avatar': 'assets/images/nurse2.png',
       'patients': 130,
       'experience': '5 yr',
       'rating': 4.9,
@@ -79,7 +79,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Kevin O\'Connor',
       'title': 'Forensic Psychologist',
-      'avatar': 'assets/images/nurse7.png',
+      'avatar': 'assets/images/nurse1.png',
       'patients': 90,
       'experience': '4 yr',
       'rating': 4.2,
@@ -89,7 +89,7 @@ class _DashboardPageState extends State<DashboardPage>
     {
       'name': 'Dr. Maya Singh',
       'title': 'Health Psychologist',
-      'avatar': 'assets/images/nurse8.png',
+      'avatar': 'assets/images/nurse2.png',
       'patients': 210,
       'experience': '6 yr',
       'rating': 4.5,
